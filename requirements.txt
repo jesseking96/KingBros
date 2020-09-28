@@ -3,3 +3,4 @@ django-heroku
 django==3.1.0
 environs[django]
 whitenoise
+Pillow
