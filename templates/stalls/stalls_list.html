@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron stalls-jumbo">
+
+
+  <h1 class="page-title"><u>Explore Our Stalls</u></h1>
+  <p>All of the stalls are designed with the average boater in mind, as each stall is at least 11.5 ft wide. Some some are almost 14′! There is plenty of backing room, and the drives are even wider in the areas with longer stalls. The Kings, too, are active boaters and have made it easy even for the first time boat owner to navigate backwards with plenty of room. There are even some drive thru stalls available.
+
+There are stalls with gravel floors and also with concrete floors. All of the stalls have rolling doors with power in each and every one.</p>
+</div>
+<h3 class="units-header"><u>Available Units</u></h3>
+<div class="row">
+
+
+{% for stall in stall_list %}
+<div class="col-md-6">
+<div class="card" style="width: 18rem;">
+<img src="{{stall.pic.url}}" class="card-img-top" alt="..." width=200px, height=200px>
+<div class="card-body">
+  <h5 class="card-title">{{stall.name}}</h5>
+  {# <p class="card-text">{{stall.description|truncatechars:50}}</p> #}
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Length: {{stall.length|floatformat}}'</li>
+    <li class="list-group-item">Width: {{stall.width|floatformat}}'</li>
+    <li class="list-group-item">Door Height: {{stall.door_height|floatformat}}'</li>
+    <li class="list-group-item">Floor Type: {{stall.floor_type}}</li>
+  </ul>
+  <a href="{% url 'stall_detail' slug=stall.slug %}" class="btn btn-primary">View</a>
+</div>
+</div>
+
+</div>
+{% endfor %}
+</div>
+
+
+{% endblock %}

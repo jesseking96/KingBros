@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Photos{% endblock %}
+
+{% block content %}
+<h1 class="page-title"><u>Photos</u></h1>
+<div class="row">
+
+
+{% for pic in pic_list %}
+<div class="col-md-6">
+
+  <img class='photo' src="{{pic.image.url}}" alt="Uh oh Spaghettio!">
+  </div>
+{% endfor %}
+</div>
+{% endblock %}

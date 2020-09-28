@@ -1,0 +1,81 @@
+.page-title{
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.home-image{
+  margin-bottom: 30px;
+}
+.home-text{
+  text-align: center;
+}
+.about-text{
+  text-align: center;
+}
+.about-image{
+  margin: auto;
+  width: 50%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.units-header{
+  text-align: center;
+}
+.card{
+  margin: auto;
+}
+body{
+  background-color: rgb(11,79,108);
+  color: rgb(251,251,255);
+  font-family: 'Montserrat', sans-serif;
+}
+p{
+  font-size: 130%;
+}
+.jumbotron{
+  background-color: #343a40;
+  margin-top: 30px;
+  text-align: center;
+  border-radius: 15px;
+}
+.contact p{
+  border: 1px solid rgb(251,251,255);
+  width: 50%;
+  border-radius: 7px;
+  margin: auto;
+  margin-top: 8px;
+}
+iframe{
+  margin-top: 10px;
+}
+.card{
+  background-color: #343a40;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.list-group-item{
+  background-color: #343a40;
+}
+.no-bullets{
+  list-style-type: none;
+}
+.no-bullets li{
+  background:#343a40;
+  border: 1px solid rgb(251,251,255);
+  margin-top: 4px;
+  border-radius: 7px;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.photo{
+  margin-top: 50px;
+  width:100%;
+}
+.page-title{
+  margin:auto;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}

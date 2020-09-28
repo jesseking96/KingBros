@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{stall.name}}{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+
+
+<img src="{{stall.pic.url}}" alt="Uh Oh" width=60%>
+<h1>{{stall.name}}</h1>
+<p>{{stall.description}}</p>
+<a class='btn btn-primary' href="{% url 'info_request' slug=stall.slug %}">Request more information</a>
+</div>
+<h3>Specifications</h3>
+<ul class="no-bullets">
+  <li>Length: {{stall.length|floatformat}}'</li>
+  <li>Width: {{stall.width|floatformat}}'</li>
+  <li>Door Height: {{stall.door_height|floatformat}}</li>
+  <li>Floor: {{stall.floor_type}}</li>
+</ul>
+{% endblock %}
