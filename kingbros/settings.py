@@ -29,7 +29,7 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG',default=False)
 
-ALLOWED_HOSTS = ['.herokuapp.com',]
+ALLOWED_HOSTS = ['.herokuapp.com','localhost']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #3rd party
     'whitenoise',
+    'storages',
     #local
     'stalls',
     'pages',
@@ -94,7 +95,21 @@ DATABASES = {
     }
 }
 
-
+AWS_ACCESS_KEY_ID = env.str('AWS_ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY = env.str('AWS_SECRET_KEY')
+AWS_STORAGE_BUCKET_NAME=env.str('AWS_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400'
+}
+#s3 Static Settings
+STATIC_LOCATION = 'static'
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+STATICFILES_STORAGE = 'kingbros.storage_backends.StaticStorage'
+#S3 Public Media Settings
+MEDIA_LOCATION = 'media'
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
+DEFAULT_FILE_STORAGE = 'kingbros.storage_backends.MediaStorage'
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -132,18 +147,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 
-STATIC_URL = '/static/'
-STATIC_ROOT = Path(BASE_DIR,'staticfiles')
+#STATIC_ROOT = Path(BASE_DIR,'staticfiles')
 STATICFILES_DIRS = [Path(BASE_DIR,'static')]
 
-MEDIA_ROOT = Path(BASE_DIR,'media')
-MEDIA_URL = '/media/'
+
+#MEDIA_ROOT = Path(BASE_DIR,'media')
+#MEDIA_URL = '/media/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 465
 EMAIL_HOST_USER = "jesseking0111@gmail.com"
-EMAIL_HOST_PASSWORD = env.read('EMAIL_PASSWORD')
+EMAIL_HOST_PASSWORD = env.str('EMAIL_PASSWORD')
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
