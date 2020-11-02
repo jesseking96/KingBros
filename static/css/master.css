@@ -7,18 +7,22 @@
   margin-bottom: 30px;
 }
 .home-text{
-  text-align: center;
+  text-align: justify;
 }
 .about-text{
-  text-align: center;
+  text-align: justify;
 }
 .about-image{
+  display: block;
   margin: auto;
   width: 50%;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 .units-header{
+  text-align: center;
+}
+.center-header{
   text-align: center;
 }
 .card{
@@ -77,5 +81,8 @@ iframe{
 .page-title{
   margin:auto;
   margin-bottom: 20px;
+  margin-top: 50px;
+}
+.info-form{
   margin-top: 50px;
 }

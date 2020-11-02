@@ -44,10 +44,13 @@ INSTALLED_APPS = [
     #3rd party
     'whitenoise',
     'storages',
+    'crispy_forms',
     #local
     'stalls',
     'pages',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -102,17 +105,23 @@ AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400'
 }
-#s3 Static Settings
-STATIC_LOCATION = 'static'
-STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
-STATICFILES_STORAGE = 'kingbros.storage_backends.StaticStorage'
-#S3 Public Media Settings
-MEDIA_LOCATION = 'media'
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
-DEFAULT_FILE_STORAGE = 'kingbros.storage_backends.MediaStorage'
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
+STATICFILES_DIRS = [Path(BASE_DIR,'static')]
+if DEBUG == False:
+    STATIC_LOCATION = 'static'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+    STATICFILES_STORAGE = 'kingbros.storage_backends.StaticStorage'
+#S3 Public Media Settings
+    MEDIA_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'kingbros.storage_backends.MediaStorage'
+else:
+    STATIC_URL = '/static/'
 
+    MEDIA_ROOT = Path(BASE_DIR,'media')
+    MEDIA_URL = '/media/'
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -162,7 +171,7 @@ EMAIL_HOST_PASSWORD = env.str('EMAIL_PASSWORD')
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
-DEFAULT_FROM_EMAIL = "jesseking96@yahoo.com"
+DEFAULT_FROM_EMAIL = "jesseking0111@gmail.com"
 
 SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
 SECURE_HSTS_SECONDS = env.int("DJANGO_SECURE_HSTS_SECONDS", default=2592000)
@@ -171,4 +180,5 @@ SECURE_HSTS_PRELOAD = env.bool("DJANGO_SECURE_HSTS_PRELOAD",default=True)
 SESSION_COOKIE_SECURE = env.bool("DJANGO_SESSION_COOKIE_SECURE",default=True)
 CSRF_COOKIE_SECURE = env.bool("DJANGO_CSRF_COOKIE_SECURE",default=True)
 
-django_heroku.settings(locals())
+if DEBUG == False:
+    django_heroku.settings(locals())
